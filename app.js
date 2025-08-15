@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerNav = document.getElementById('customer-nav');
     const adminNav = document.getElementById('admin-nav');
 
-    // --- وظيفة التحكم في التبويبات (كما هي) ---
+    // --- وظيفة التحكم في التبويبات ---
     function showTab(tabId) {
         tabContents.forEach(content => content.classList.remove('active'));
         tabLinks.forEach(link => link.classList.remove('active-link'));
@@ -18,16 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeLink) activeLink.classList.add('active-link');
     }
 
-    // --- إضافة مستمعي الأحداث لروابط التبويبات (كما هي) ---
+    // --- إضافة مستمعي الأحداث لروابط التبويبات ---
+    // هذا الكود يجد أي عنصر يحمل كلاس tab-link ويجعله يعمل كزر تبويب
     tabLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const tabId = link.getAttribute('data-tab');
-            showTab(tabId);
+            if(tabId) { // التأكد من وجود قيمة للـ data-tab
+                 showTab(tabId);
+            }
         });
     });
 
-    // --- منطق نموذج التسجيل (جديد) ---
+    // --- منطق نموذج التسجيل ---
     const registerForm = document.getElementById('register-form');
     registerForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showTab('login-tab'); // **الانتقال إلى صفحة تسجيل الدخول**
     });
 
-    // --- منطق تسجيل الدخول (معدّل) ---
+    // --- منطق تسجيل الدخول ---
     const loginForm = document.getElementById('login-form');
     loginForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -61,9 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- وظيفة التحقق من حالة تسجيل الدخول عند تحميل الصفحة (الأهم) ---
+    // --- وظيفة التحقق من حالة تسجيل الدخول عند تحميل الصفحة ---
     function checkAuthState() {
         // **هذا الجزء هو المكان الذي ستضع فيه مستمع Firebase onAuthStateChanged**
+        // للتحقق إذا كان المستخدم مسجل دخوله من زيارة سابقة
         // const user = firebase.auth().currentUser;
         
         // محاكاة للتحقق: سنفترض أن المستخدم غير مسجل دخول
@@ -72,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userIsLoggedIn) {
             // إذا كان المستخدم مسجل دخوله بالفعل
             console.log("المستخدم مسجل دخوله، سيتم توجيهه للمتجر.");
-            // هنا تتحقق من صلاحياته وتوجهه للصفحة المناسبة (متجر أو لوحة تحكم)
             showTab('store-tab');
         } else {
             // إذا لم يكن مسجل دخوله
