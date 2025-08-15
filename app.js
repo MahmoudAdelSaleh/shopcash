@@ -6,64 +6,83 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerNav = document.getElementById('customer-nav');
     const adminNav = document.getElementById('admin-nav');
 
-    // --- وظيفة التحكم في التبويبات ---
+    // --- وظيفة التحكم في التبويبات (كما هي) ---
     function showTab(tabId) {
-        // إخفاء جميع محتويات التبويبات
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-        });
-
-        // إزالة علامة النشاط من جميع روابط التبويبات
-        tabLinks.forEach(link => {
-            link.classList.remove('active-link');
-        });
-
-        // إظهار المحتوى المطلوب
+        tabContents.forEach(content => content.classList.remove('active'));
+        tabLinks.forEach(link => link.classList.remove('active-link'));
+        
         const selectedTab = document.getElementById(tabId);
-        if (selectedTab) {
-            selectedTab.classList.add('active');
-        }
+        if (selectedTab) selectedTab.classList.add('active');
 
-        // إضافة علامة النشاط للرابط المضغوط
         const activeLink = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
-         if (activeLink) {
-            activeLink.classList.add('active-link');
-        }
+        if (activeLink) activeLink.classList.add('active-link');
     }
 
-    // --- إضافة مستمعي الأحداث لروابط التبويبات ---
+    // --- إضافة مستمعي الأحداث لروابط التبويبات (كما هي) ---
     tabLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // منع السلوك الافتراضي للرابط
+            event.preventDefault();
             const tabId = link.getAttribute('data-tab');
             showTab(tabId);
         });
     });
 
-    // --- منطق تسجيل الدخول (كمثال) ---
+    // --- منطق نموذج التسجيل (جديد) ---
+    const registerForm = document.getElementById('register-form');
+    registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        // **هنا ستكتب كود تسجيل المستخدم في Firebase Authentication**
+        // **ثم حفظ بياناته في Firestore**
+
+        // بعد نجاح عملية التسجيل
+        alert('تم تسجيل حسابك بنجاح! يرجى تسجيل الدخول.');
+        showTab('login-tab'); // **الانتقال إلى صفحة تسجيل الدخول**
+    });
+
+    // --- منطق تسجيل الدخول (معدّل) ---
     const loginForm = document.getElementById('login-form');
     loginForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        const email = loginForm.querySelector('input[type="email"]').value;
-        const password = loginForm.querySelector('input[type="password"]').value;
-        const adminCode = loginForm.querySelector('input[type="text"]').value;
-
+        
         // **هنا ستكتب كود التحقق من Firebase**
-        // مثال توضيحي للمنطق فقط:
-        if (email === "admin@example.com" && password === "123456" && adminCode === "ADMIN_CODE") {
-            // إذا كان مدير
-            alert('مرحباً أيها المدير!');
-            customerNav.classList.add('hidden'); // إخفاء نافذة العميل
-            adminNav.classList.remove('hidden'); // إظهار نافذة المدير
-            showTab('admin-items-tab'); // عرض تبويب الأصناف كصفحة رئيسية للمدير
+        // بعد نجاح تسجيل الدخول...
+        // 1. تحقق من صلاحيات المستخدم (customer or admin) من Firestore
+        // 2. بناءً على الصلاحيات، أظهر شريط التنقل المناسب
+
+        // كمثال توضيحي:
+        const isAdmin = false; // افتراض أن المستخدم عميل
+        if (isAdmin) {
+            customerNav.classList.add('hidden');
+            adminNav.classList.remove('hidden');
+            showTab('admin-items-tab');
         } else {
-            // إذا كان عميل عادي
-            alert('تم تسجيل الدخول بنجاح!');
-            showTab('store-tab'); // عرض المتجر بعد تسجيل الدخول
+            // **الانتقال إلى المتجر بعد تسجيل الدخول**
+            showTab('store-tab');
         }
     });
-    
-    // --- إظهار تبويب تسجيل الدخول عند فتح الصفحة لأول مرة ---
-    showTab('login-tab');
+
+    // --- وظيفة التحقق من حالة تسجيل الدخول عند تحميل الصفحة (الأهم) ---
+    function checkAuthState() {
+        // **هذا الجزء هو المكان الذي ستضع فيه مستمع Firebase onAuthStateChanged**
+        // const user = firebase.auth().currentUser;
+        
+        // محاكاة للتحقق: سنفترض أن المستخدم غير مسجل دخول
+        const userIsLoggedIn = false; 
+
+        if (userIsLoggedIn) {
+            // إذا كان المستخدم مسجل دخوله بالفعل
+            console.log("المستخدم مسجل دخوله، سيتم توجيهه للمتجر.");
+            // هنا تتحقق من صلاحياته وتوجهه للصفحة المناسبة (متجر أو لوحة تحكم)
+            showTab('store-tab');
+        } else {
+            // إذا لم يكن مسجل دخوله
+            console.log("لا يوجد مستخدم، سيتم عرض صفحة التسجيل.");
+            // **هنا نجعل صفحة التسجيل هي الصفحة الافتراضية**
+            showTab('register-tab');
+        }
+    }
+
+    // --- بدء تشغيل التطبيق ---
+    checkAuthState(); // استدعاء دالة التحقق عند بدء تشغيل الصفحة
 
 });
