@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجري الإلكتروني</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +18,6 @@
             <a href="#" class="tab-link" data-tab="cart-tab">🛒 السلة</a>
             <a href="#" class="tab-link" data-tab="profile-tab">👤 صفحتي الشخصية</a>
             <a href="#" class="tab-link" data-tab="login-tab">🔑 تسجيل الدخول</a>
-            <a href="#" class="tab-link" data-tab="register-tab">📝 تسجيل جديد</a>
         </nav>
 
         <nav id="admin-nav" class="hidden">
@@ -28,16 +30,6 @@
     </header>
 
     <main>
-        <section id="login-tab" class="tab-content active">
-            <h2>تسجيل الدخول</h2>
-            <form id="login-form">
-                <input type="email" placeholder="البريد الإلكتروني" required>
-                <input type="password" placeholder="كلمة المرور" required>
-                <input type="text" placeholder="الكود الفريد (للمدراء فقط - اختياري)">
-                <button type="submit">دخول</button>
-            </form>
-        </section>
-
         <section id="register-tab" class="tab-content">
             <h2>تسجيل حساب جديد</h2>
             <form id="register-form">
@@ -51,13 +43,35 @@
             </form>
         </section>
 
+        <section id="login-tab" class="tab-content">
+            <h2>تسجيل الدخول</h2>
+            <form id="login-form">
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" placeholder="كلمة المرور" required>
+                <input type="text" placeholder="الكود الفريد (اختياري للمدراء)">
+                <button type="submit">دخول</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                ليس لديك حساب؟ 
+                <a href="#" class="tab-link" data-tab="register-tab" style="color: var(--secondary-color); font-weight: bold;">
+                    سجل الآن
+                </a>
+            </p>
+        </section>
+
         <section id="store-tab" class="tab-content">
             <h2>المتجر</h2>
             <div id="product-list">
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/150" alt="منتج">
+                    <img src="https://via.placeholder.com/200" alt="منتج">
                     <h3>اسم الصنف 1</h3>
-                    <p>السعر: 100 جنيه</p>
+                    <p>100 جنيه</p>
+                    <button>أضف إلى السلة</button>
+                </div>
+                 <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="منتج">
+                    <h3>اسم الصنف 2</h3>
+                    <p>150 جنيه</p>
                     <button>أضف إلى السلة</button>
                 </div>
             </div>
@@ -75,19 +89,16 @@
 
         <section id="admin-items-tab" class="tab-content">
             <h2>إدارة الأصناف والمخزون</h2>
-            </section>
-
+        </section>
         <section id="admin-orders-tab" class="tab-content">
             <h2>تأكيد عمليات الشراء</h2>
-            </section>
-
+        </section>
         <section id="admin-invoices-tab" class="tab-content">
             <h2>الفواتير</h2>
-            </section>
-
+        </section>
         <section id="admin-reports-tab" class="tab-content">
             <h2>التقارير والإدارة</h2>
-            </section>
+        </section>
 
     </main>
 
