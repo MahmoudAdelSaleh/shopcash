@@ -1,221 +1,96 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#007bff"/>
-    <title>كاشير متكامل - Firebase</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجري الإلكتروني</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-    <div id="login-container">
-        <form id="login-form">
-            <h2><i class="fas fa-lock"></i> تسجيل الدخول</h2>
-            <div class="form-group">
-                <input type="text" id="usernameInput" placeholder="اسم المستخدم" required />
-            </div>
-            <div class="form-group">
-                <input type="password" id="passwordInput" placeholder="كلمة المرور" required />
-            </div>
-            <button type="submit" id="loginBtn"><i class="fas fa-sign-in-alt"></i> دخول</button>
-        </form>
-    </div>
-
-    <div id="app-container">
-        <header>
-            <span>كاشير متكامل</span>
-            <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
-        </header>
-
-        <nav>
-            <button data-tab="items"><i class="fas fa-box"></i> الأصناف</button>
-            <button data-tab="customers"><i class="fas fa-users"></i> العملاء</button>
-            <button class="active" data-tab="sales"><i class="fas fa-cash-register"></i> المبيعات</button>
-            <button data-tab="invoices"><i class="fas fa-file-invoice"></i> الفواتير</button>
-            <button data-tab="summary"><i class="fas fa-chart-bar"></i> التقارير</button>
-            <button data-tab="users" class="hidden"><i class="fas fa-user-shield"></i> إدارة المستخدمين</button>
+    <header>
+        <h1>متجري الإلكتروني</h1>
+        <nav id="customer-nav">
+            <a href="#" class="tab-link" data-tab="store-tab">🛍️ المتجر</a>
+            <a href="#" class="tab-link" data-tab="cart-tab">🛒 السلة</a>
+            <a href="#" class="tab-link" data-tab="profile-tab">👤 صفحتي الشخصية</a>
+            <a href="#" class="tab-link" data-tab="login-tab">🔑 تسجيل الدخول</a>
+            <a href="#" class="tab-link" data-tab="register-tab">📝 تسجيل جديد</a>
         </nav>
 
-        <main>
-            <section id="items">
-              <h2><i class="fas fa-box"></i> إدارة الأصناف</h2>
-              
-              <div class="management-panel">
-                <h4><i class="fas fa-tags"></i> إدارة الفئات</h4>
-                <div class="form-group flex-container">
-                    <input type="text" id="categoryNameInput" placeholder="اسم الفئة الجديدة أو المعدلة">
-                    <button id="saveCategoryBtn"><i class="fas fa-save"></i> حفظ الفئة</button>
-                    <button id="clearCategoryFormBtn" class="btn-warning"><i class="fas fa-undo"></i></button>
+        <nav id="admin-nav" class="hidden">
+            <a href="#" class="tab-link" data-tab="admin-items-tab">📦 الأصناف</a>
+            <a href="#" class="tab-link" data-tab="admin-orders-tab">✔️ تأكيد الطلبات</a>
+            <a href="#" class="tab-link" data-tab="admin-invoices-tab">🧾 الفواتير</a>
+            <a href="#" class="tab-link" data-tab="admin-reports-tab">📊 التقارير</a>
+            <a href="#" id="logout-btn">🚪 تسجيل الخروج</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="login-tab" class="tab-content active">
+            <h2>تسجيل الدخول</h2>
+            <form id="login-form">
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" placeholder="كلمة المرور" required>
+                <input type="text" placeholder="الكود الفريد (للمدراء فقط - اختياري)">
+                <button type="submit">دخول</button>
+            </form>
+        </section>
+
+        <section id="register-tab" class="tab-content">
+            <h2>تسجيل حساب جديد</h2>
+            <form id="register-form">
+                <input type="text" placeholder="الاسم بالكامل" required>
+                <input type="text" placeholder="العنوان" required>
+                <input type="tel" placeholder="رقم الهاتف" required>
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" placeholder="كلمة المرور" required>
+                <textarea placeholder="ملاحظات (اختياري)"></textarea>
+                <button type="submit">تسجيل</button>
+            </form>
+        </section>
+
+        <section id="store-tab" class="tab-content">
+            <h2>المتجر</h2>
+            <div id="product-list">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="منتج">
+                    <h3>اسم الصنف 1</h3>
+                    <p>السعر: 100 جنيه</p>
+                    <button>أضف إلى السلة</button>
                 </div>
-                <div id="categoriesList" class="tags-container">
-                    </div>
-              </div>
-              
-              <hr style="margin: 25px 0;">
+            </div>
+        </section>
 
-              <h4><i class="fas fa-plus-circle"></i> إضافة أو تعديل صنف</h4>
-              <div class="form-group flex-container">
-                <input type="text" id="itemCode" placeholder="كود الصنف" />
-                <input type="text" id="itemName" placeholder="اسم الصنف" />
-                <input type="text" id="itemUnit" placeholder="الوحدة" />
-              </div>
-              <div class="form-group flex-container">
-                <input type="number" id="itemPrice" placeholder="السعر" min="0" step="0.01" />
-                <input type="number" id="itemStock" placeholder="المخزون" min="0" />
-                <select id="itemCategorySelect">
-                    <option value="">اختر الفئة</option>
-                </select>
-                <button id="saveItemBtn"><i class="fas fa-save"></i> حفظ الصنف</button>
-              </div>
-              
-              <div class="form-group flex-container" style="margin-top: 20px;">
-                <label for="filterCategorySelect" style="flex-grow: 0; margin-right: 10px;">تصفية حسب الفئة:</label>
-                <select id="filterCategorySelect">
-                    <option value="all">جميع الفئات</option>
-                </select>
-              </div>
+        <section id="cart-tab" class="tab-content">
+            <h2>سلة المشتريات</h2>
+            <button>تأكيد الشراء</button>
+        </section>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>كود</th>
-                    <th>اسم</th>
-                    <th>وحدة</th>
-                    <th>سعر</th>
-                    <th>مخزون</th>
-                    <th>فئة</th>
-                    <th>تعديل</th>
-                    <th>حذف</th>
-                  </tr>
-                </thead>
-                <tbody id="itemsTable"></tbody>
-              </table>
+        <section id="profile-tab" class="tab-content">
+            <h2>صفحتي الشخصية</h2>
             </section>
 
-            <section id="customers">
-              <h2><i class="fas fa-users"></i> إدارة العملاء</h2>
-              <div class="management-panel">
-                  <h4><i class="fas fa-user-plus"></i> إضافة أو تعديل عميل</h4>
-                  <div class="form-group">
-                      <input type="text" id="newCustomerName" placeholder="الاسم الثلاثي للعميل" required>
-                  </div>
-                  <div class="form-group flex-container">
-                      <input type="tel" id="newCustomerPhone" placeholder="رقم الهاتف" required>
-                      <input type="text" id="newCustomerAddress" placeholder="العنوان">
-                  </div>
-                  <div class="form-group">
-                      <textarea id="newCustomerNotes" placeholder="ملاحظات (اختياري)" rows="2"></textarea>
-                  </div>
-                  <button id="saveCustomerBtn"><i class="fas fa-save"></i> حفظ العميل</button>
-              </div>
-              <hr style="margin: 25px 0;">
-              <div id="customersList"></div>
-              <div id="customerStatement" style="display:none;">
-                <h3><i class="fas fa-clipboard-list"></i> كشف حساب العميل: <span id="statementCustomerName"></span></h3>
-                <button id="backToCustomersBtn"><i class="fas fa-arrow-right"></i> رجوع لقائمة العملاء</button>
-                <div id="statementDetails" style="margin-top: 15px;"></div>
-              </div>
+
+        <section id="admin-items-tab" class="tab-content">
+            <h2>إدارة الأصناف والمخزون</h2>
             </section>
 
-            <section id="sales" class="active" style="position: relative;">
-              <h2><i class="fas fa-cash-register"></i> عملية بيع</h2>
-              <div class="form-group" style="position: relative;">
-                <input type="text" id="customerName" placeholder="بحث باسم العميل أو رقم هاتفه" autocomplete="off" />
-                <div id="customerSuggestions"></div>
-              </div>
-              <div class="form-group" style="position: relative;">
-                <input type="text" id="searchItem" placeholder="بحث بالكود أو اسم الصنف" autocomplete="off" />
-                <div id="searchResults"></div>
-              </div>
-              <div class="form-group flex-container">
-                <label for="quantitySelect">الكمية:</label>
-                <select id="quantitySelect"></select>
-                <button id="addToInvoiceBtn"><i class="fas fa-plus-circle"></i> إضافة للفاتورة</button>
-              </div>
-              <h3><i class="fas fa-file-invoice"></i> تفاصيل الفاتورة</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>اسم الصنف</th><th>كمية</th><th>سعر الوحدة</th><th>الإجمالي</th><th>حذف</th>
-                  </tr>
-                </thead>
-                <tbody id="invoiceTable"></tbody>
-              </table>
-              <h3 style="text-align: left;">إجمالي الفاتورة: <span id="invoiceTotal">0.00</span> ج.م</h3>
-              <div class="form-group flex-container">
-                <label for="paymentMethodSelect">طريقة الدفع:</label>
-                <select id="paymentMethodSelect">
-                  <option value="cash">نقداً</option><option value="visa">فيزا</option><option value="wallet">محفظة</option>
-                </select>
-                <input type="number" id="amountPaidInput" placeholder="المبلغ المدفوع" min="0" step="0.01" />
-              </div>
-              <h3 style="text-align: left;">
-                <span id="changeText">الباقي للعميل:</span><span id="changeAmount">0.00</span> ج.م
-              </h3>
-              <div class="flex-container flex-end" style="margin-top: 20px;">
-                <button id="printInvoiceBtn" class="btn-success"><i class="fas fa-print"></i> طباعة الفاتورة</button>
-                <button id="saveInvoiceBtn"><i class="fas fa-save"></i> حفظ الفاتورة</button>
-              </div>
+        <section id="admin-orders-tab" class="tab-content">
+            <h2>تأكيد عمليات الشراء</h2>
             </section>
 
-            <section id="invoices">
-              <h2><i class="fas fa-file-invoice-dollar"></i> الفواتير المحفوظة</h2>
-              <div id="invoicesList"></div>
+        <section id="admin-invoices-tab" class="tab-content">
+            <h2>الفواتير</h2>
             </section>
 
-            <section id="summary">
-              <h2><i class="fas fa-chart-bar"></i> التقارير</h2>
-              <div class="form-group flex-container">
-                  <label for="summaryGroupSelect">تجميع حسب:</label>
-                  <select id="summaryGroupSelect">
-                      <option value="day">اليوم</option><option value="week">الأسبوع</option><option value="month">الشهر</option>
-                  </select>
-              </div>
-              <div class="summary-box">
-                <i class="fas fa-coins"></i> <strong>المجموع الكلي للمبيعات:</strong> <span id="totalSalesAmount">0.00</span> ج.م
-              </div>
-              <table>
-                <thead>
-                  <tr><th>الفترة</th><th>عدد الفواتير</th><th>المبلغ</th></tr>
-                </thead>
-                <tbody id="salesSummaryTable"></tbody>
-              </table>
-              <div style="margin-top: 30px;">
-                <h3><i class="fas fa-star"></i> الأصناف الأكثر مبيعًا</h3>
-                <div id="bestSellingItems" class="summary-box"><p>لا توجد بيانات متاحة.</p></div>
-              </div>
-              <div class="flex-container flex-end" style="margin-top: 20px;">
-                <button id="resetAfterDateBtn" class="btn-warning"><i class="fas fa-history"></i> حذف الفواتير بعد تاريخ</button>
-                <button id="fullResetBtn" class="btn-danger"><i class="fas fa-trash-alt"></i> إعادة ضبط كاملة</button>
-              </div>
+        <section id="admin-reports-tab" class="tab-content">
+            <h2>التقارير والإدارة</h2>
             </section>
 
-            <section id="users">
-              <h2><i class="fas fa-user-shield"></i> إدارة المستخدمين</h2>
-              <div class="form-group flex-container">
-                <input type="text" id="newUsernameInput" placeholder="اسم المستخدم" />
-                <input type="password" id="newUserPasswordInput" placeholder="كلمة المرور" />
-                <button id="saveUserBtn"><i class="fas fa-plus-circle"></i> إضافة مستخدم</button>
-              </div>
-              <div id="usersList"></div>
-              <div id="changePinSection">
-                  <h4><i class="fas fa-key"></i> تغيير كلمة مرور المدير العام</h4>
-                  <div class="form-group flex-container">
-                      <input type="password" id="oldPinInput" placeholder="الكلمة القديمة" />
-                      <input type="password" id="newPinInput" placeholder="الكلمة الجديدة" />
-                      <button id="changePinBtn" class="btn-warning"><i class="fas fa-sync-alt"></i> تغيير الكلمة</button>
-                  </div>
-              </div>
-            </section>
-        </main>
-    </div>
-    <div id="notification-container"></div>
+    </main>
 
-    <script src="firebase-config.js" type="module"></script>
-    <script src="main.js" type="module"></script>
+    <script src="app.js"></script>
 </body>
 </html>
-
