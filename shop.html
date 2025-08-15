@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: var(--white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .shop-header .user-info {
+            font-weight: bold;
+        }
+        .shop-header .cart-summary {
+            cursor: pointer;
+        }
+        #categories-bar {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            overflow-x: auto;
+            background: #f1f1f1;
+        }
+        #categories-bar button {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        #categories-bar button.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        #products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 15px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-card h3 {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+        .product-card .price {
+            color: var(--success-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #cart-section {
+            padding: 15px;
+            background: var(--white);
+            border-top: 2px solid var(--primary-color);
+            margin-top: 20px;
+        }
+        #cart-section h2 {
+            text-align: center;
+        }
+        #cart-items-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="shop-header">
+        <div class="user-info">
+            <i class="fas fa-user"></i>
+            أهلاً، <span id="customer-name-placeholder">...</span>
+        </div>
+        <div class="cart-summary">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span> أصناف
+        </div>
+        <div>
+             <a href="profile.html" style="margin-left: 15px; color: var(--secondary-color);"><i class="fas fa-id-card"></i> ملفي الشخصي</a>
+            <button id="logout-btn" class="btn-small btn-danger"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <div id="categories-bar">
+            </div>
+
+        <div id="products-grid">
+            </div>
+
+        <section id="cart-section">
+            <h2><i class="fas fa-shopping-basket"></i> سلة المشتريات</h2>
+            <ul id="cart-items-list">
+                </ul>
+            <h3 style="text-align: left;">الإجمالي: <span id="cart-total">0.00</span> ج.م</h3>
+            <button id="place-order-btn" class="btn-success" style="width: 100%; margin-top: 10px;"><i class="fas fa-check"></i> إتمام الطلب</button>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js" type="module"></script>
+
+    <script src="shop.js" type="module"></script>
+</body>
+</html>
+

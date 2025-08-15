@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفي الشخصي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        .profile-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        .profile-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+        }
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .profile-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        .profile-info-row {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .profile-info-row i {
+            color: var(--primary-color);
+            margin-left: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        .profile-info-row span {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        .points-card {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        .points-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+        .points-card .points-balance {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2><i class="fas fa-id-card"></i> ملفي الشخصي</h2>
+                <a href="shop.html" class="btn-small"><i class="fas fa-store"></i> العودة للمتجر</a>
+            </div>
+
+            <div class="profile-info">
+                <div class="profile-info-row">
+                    <i class="fas fa-user"></i>
+                    <span><strong>الاسم:</strong> <span id="profile-name">...</span></span>
+                </div>
+                <div class="profile-info-row">
+                    <i class="fas fa-barcode"></i>
+                    <span><strong>كود العميل:</strong> <span id="profile-customerId">...</span></span>
+                </div>
+                <div class="profile-info-row">
+                    <i class="fas fa-phone"></i>
+                    <span><strong>رقم الهاتف:</strong> <span id="profile-phone">...</span></span>
+                </div>
+                <div class="profile-info-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span><strong>العنوان:</strong> <span id="profile-address">...</span></span>
+                </div>
+            </div>
+
+            <div class="points-card">
+                <h3><i class="fas fa-star"></i> رصيد نقاطي</h3>
+                <div class="points-balance" id="profile-points">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js" type="module"></script>
+    
+    <script src="profile.js" type="module"></script>
+</body>
+</html>
+

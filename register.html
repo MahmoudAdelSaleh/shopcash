@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* Re-using the same styles from the login page for consistency */
+        .customer-portal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e9ecef;
+        }
+        .customer-portal-form {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+        .customer-portal-form h2 {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        .customer-portal-form a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        .customer-portal-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-portal-container">
+        <form id="customer-register-form" class="customer-portal-form">
+            <h2><i class="fas fa-user-plus"></i> إنشاء حساب جديد</h2>
+            <div class="form-group">
+                <input type="text" id="nameInput" placeholder="اسمك الثلاثي" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phoneInput" placeholder="رقم الهاتف (سيتم استخدامه لتسجيل الدخول)" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="addressInput" placeholder="العنوان بالتفصيل" required>
+            </div>
+            <button type="submit" id="registerCustomerBtn"><i class="fas fa-check-circle"></i> إنشاء الحساب</button>
+            <a href="login-customer.html">لديك حساب بالفعل؟ سجل الدخول</a>
+        </form>
+    </div>
+    
+    <div id="recaptcha-container"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js" type="module"></script>
+    
+    <script src="auth-customer.js" type="module"></script>
+</body>
+</html>
+

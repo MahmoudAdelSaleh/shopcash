@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل دخول العميل</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* A few specific styles for the customer login/register pages */
+        .customer-portal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e9ecef;
+        }
+        .customer-portal-form {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+        .customer-portal-form h2 {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        .customer-portal-form a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        .customer-portal-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-portal-container">
+        <form id="customer-login-form" class="customer-portal-form">
+            <h2><i class="fas fa-user-circle"></i> أهلاً بعودتك</h2>
+            <p>سجل الدخول باستخدام رقم هاتفك المسجل لدينا.</p>
+            <div class="form-group">
+                <input type="tel" id="phoneInput" placeholder="رقم الهاتف (مثال: 01012345678)" required>
+            </div>
+            <button type="submit" id="loginCustomerBtn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+            <a href="register.html">ليس لديك حساب؟ أنشئ حسابًا جديدًا</a>
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js" type="module"></script>
+    
+    <script src="auth-customer.js" type="module"></script>
+</body>
+</html>
+
